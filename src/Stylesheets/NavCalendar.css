@@ -1,0 +1,12 @@
+
+.nav-calendar-button {
+     display: inline-block;
+}
+#navModal {
+     opacity: 1;
+     /* width: 330px; */
+     /* left: 890px; */
+}
+.modal-body {
+     margin-top: 30px;
+}

@@ -1,0 +1,17 @@
+.nav-table th {
+    width: 10px;
+    height: 10px;
+}
+.nav-table td {
+    width: 10px;
+    height: 10px;
+}
+.nav-table table {
+    background-color: #d6d6c2;
+}
+.nav-table td.current-month-day:hover {
+     color: #fff;
+     background-color: red;
+     border-radius: 45px;
+     cursor: pointer;
+}

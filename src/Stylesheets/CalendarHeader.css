@@ -1,0 +1,22 @@
+.show-today-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    display: inline-block;
+}
+.show-today-button:hover {
+    cursor: pointer;
+}
+.navigation-container {
+    margin: 8px;
+}
+.navigation-options {
+    padding-left: 20%;
+}
+.navigation-options * {
+    padding-left: 10px;
+}
+.year-month-wrapper {
+    display: inline-block;
+    width: 150px;
+}

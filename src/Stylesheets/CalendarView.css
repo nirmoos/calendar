@@ -1,0 +1,23 @@
+.prev-month-day, .next-month-day {
+    color: #adad85;
+}
+.table-container th {
+    width: 14.2%;
+    height: 50px;
+    border-bottom: none;
+    padding: 0;
+}
+.table-container td {
+    width: 14.2%;
+    height: 150px;
+}
+.table-container td:first-child.curr-month-day {
+    color: red;
+}
+.table-container thead tr:first-child {
+    color: #a6a6a6;
+    font-weight: 1px;
+}
+.table-container {
+     font-size: 14px;
+}
