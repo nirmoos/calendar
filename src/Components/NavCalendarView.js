@@ -7,24 +7,23 @@ class CalendarNavView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            year: this.props.currentDay.year,
-            month: this.props.currentDay.month,
-            date: this.props.currentDay.date,
+            currentDay: props.currentDay,
         }
         this.onClick = this.onClick.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
-            year: nextProps.currentDay.year,
-            month: nextProps.currentDay.month,
-            date: nextProps.currentDay.date,
+            currentDay: nextProps.currentDay,
         });
     }
     onClick (event) {
-        // console.log(event.currentTarget.dataset.value);
-        this.props.updateCurrentDay();
+        let date = this.state.currentDay;
+        date.date = event.currentTarget.dataset.value;
+        this.props.updateCurrentDay(date);
+        this.props.onModalClose();
     }
     render() {
+        console.log(this.props.reminderList);
         return (
            <div className='nav-table-container'>
                 <table className='nav-table'>
@@ -40,7 +39,7 @@ class CalendarNavView extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <TableBody onClick={this.onClick} year={this.state.year} month={this.state.month} />
+                        <TableBody onClick={this.onClick} year={this.state.currentDay.year} month={this.state.currentDay.month} />
                     </tbody>
                </table>
           </div>

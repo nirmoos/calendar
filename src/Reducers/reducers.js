@@ -11,21 +11,24 @@ export function currentDay (state=initialCurrentDayState(), action) {
     }
 };
 
-export function reminderList (state=[], action) {
+export function reminderList (state={}, action) {
     switch (action.type) {
         case 'ADD_REMINDER':
-            return [...state, {task: action.task}, {date: action.date}];
-        case 'DELETE_REMINDER':
-            //logic
-            break;
-        default:
-            return state;
-    }
-}
+            let obj = { title: action.title, date: action.date, time: action.time  };
+            let year = obj.date.year; let month = obj.date.month;
+            let newState = {...state};
 
-export function history (state=[], action) {
-    switch (action.type) {
-        case 'PUSH_TO_HISTORY':
+            newState[year] !== undefined ? (
+                newState[year][month] !== undefined ? (
+                    newState[year][month] = combineAndSort( newState[year][month], obj )
+                ) : (
+                    newState[year][month] = combineAndSort( [], obj )
+                )
+            ) : (
+                newState[year] = { [month]: combineAndSort( [], obj ) }
+            );
+            return newState;
+        case 'DELETE_REMINDER':
             //logic
             break;
         default:
@@ -40,4 +43,15 @@ const initialCurrentDayState = () => {
         month: date.getMonth(),
         date: date.getDate(),
     }
+}
+
+
+function combineAndSort ( obj, date ) {
+    for (let i=0; i<obj.length; i++) {
+        if ( Number( obj[i].date.date ) > Number( date.date.date ) ) {
+            obj.splice(i, 0, date);
+            return [...obj];
+        }
+    }
+    return [...obj, date];
 }

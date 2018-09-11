@@ -1,0 +1,33 @@
+
+.nav-calendar-button {
+     display: inline-block;
+}
+#remNavModal {
+     opacity: 1;
+     margin-top: 50px;
+     /* width: 330px; */
+     /* left: 890px; */
+}
+.modal-body {
+     margin-top: 30px;
+}
+.remainder-nav-modal {
+    /* position: absolute; */
+}
+#remNavModal th {
+    width: 10px;
+    height: 10px;
+}
+#remNavModal td {
+    width: 10px;
+    height: 10px;
+}
+#remNavModal table {
+    background-color: #d6d6c2;
+}
+#remNavModal td.current-month-day:hover {
+     color: #fff;
+     background-color: red;
+     border-radius: 45px;
+     cursor: pointer;
+}

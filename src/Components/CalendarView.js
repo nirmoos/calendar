@@ -1,31 +1,37 @@
 import React from 'react';
 
-// import AddReminder from './AddReminder';
+import AddReminder from './AddReminder';
 import '../Stylesheets/CalendarView.css';
-import MainTableBody from './TableBody';
+import MainTableBody from './MainTableBody';
 
 class CalendarView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            year: this.props.currentDay.year,
-            month: this.props.currentDay.month,
-            date: this.props.currentDay.date,
+            currentDay: this.props.currentDay,
+            isVisible: false,
         }
         this.onClick = this.onClick.bind(this);
+        this.onModalClose = this.onModalClose.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
-            year: nextProps.currentDay.year,
-            month: nextProps.currentDay.month,
-            date: nextProps.currentDay.date,
+            currentDay: nextProps.currentDay,
         });
     }
     onClick (event) {
-        console.log(event.currentTarget.dataset.value);
-        // document.getElementById("basicExampleModal").modal('show');
+        this.clickedDate = event.currentTarget.dataset.value;
+        this.setState({
+            isVisible: true,
+        })
+    }
+    onModalClose () {
+        this.setState({
+            isVisible: false,
+        })
     }
     render() {
+        let startOnDate = this.clickedDate !== undefined ? {clickedDate: this.clickedDate} : {};
         return (
             <div className='table-container'>
                 <table className='table table-bordered'>
@@ -41,9 +47,13 @@ class CalendarView extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <MainTableBody onClick={this.onClick} reminderList={this.props.reminderList} year={this.state.year} month={this.state.month} />
+                        <MainTableBody onClick={this.onClick} reminderList={this.props.reminderList} year={this.state.currentDay.year} month={this.state.currentDay.month} />
                     </tbody>
                 </table>
+                { this.state.isVisible && <AddReminder
+                    onModalClose={this.onModalClose}
+                    {...startOnDate}
+                /> }
             </div>
         );
     }

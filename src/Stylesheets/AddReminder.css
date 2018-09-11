@@ -12,9 +12,17 @@
 }
 #add-task-modal .modal-header i{
      height: 20px;
-width: 20px;
-opacity: 1;
-display: block;
-color: #fff;
-background-color: black;
+    width: 20px;
+
+    opacity: 1;
+    display: block;
+    color: #fff;
+    background-color: black;
+
+}
+#add-task-modal {
+    margin-top: 50px;
+    position: absolute;
+    z-index: 5000;
+    margin-top: 300px;
 }

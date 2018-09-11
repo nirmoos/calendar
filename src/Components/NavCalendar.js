@@ -1,15 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import NavCalendarView from '../Components/NavCalendarView';
-import { update_current_day } from '../Actions';
 import '../Stylesheets/NavCalendar.css';
 import changeDate from '../Utils/Functions';
+import NavCalendarView from './NavCalendarView';
 
-class NavHeader extends React.Component {
+
+class NavCalendar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentDay: this.props.currentDay,
+        }
+        this.style = {
+            display: 'block',
+            opacity: '1',
         }
         this.updateMonth = this.updateMonth.bind(this);
     }
@@ -29,9 +32,8 @@ class NavHeader extends React.Component {
          let monthName = date.toLocaleString("en-us", { month: "long" });
          return (
               <div className='nav-calendar-button'>
-              <i className='fas fa-caret-down' data-toggle='modal' data-target='#navModal'></i>
               <div>
-                   <div className="modal fade" id="navModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div className="modal fade" id="navModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style={this.style}>
                    <div className="modal-dialog">
                         <div className="modal-content">
                              <div className="modal-body">
@@ -40,6 +42,7 @@ class NavHeader extends React.Component {
                                   <span>{monthName}</span>
                                   <span>{this.state.currentDay.year}</span>
                                   <NavCalendarView
+                                        onModalClose={this.props.onModalClose}
                                        currentDay={this.state.currentDay}
                                        updateCurrentDay={() => this.props.updateCurrentDay(this.state.currentDay)}
                                   />
@@ -53,16 +56,4 @@ class NavHeader extends React.Component {
     }
 
 }
-
-const mapStatetoProps = state => ({
-    currentDay: state.currentDay,
-})
-
-const mapDispatchtoProps = dispatch => ({
-    updateCurrentDay: date => dispatch(update_current_day(date))
-});
-
-export default connect (
-    mapStatetoProps,
-    mapDispatchtoProps,
-)(NavHeader);
+export default NavCalendar;

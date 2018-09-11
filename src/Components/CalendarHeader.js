@@ -1,14 +1,28 @@
 import React from 'react';
 
 import '../Stylesheets/CalendarHeader.css';
-import NavCalendar from '../Apps/NavCalendar';
+import NavCalendar from '../Containers/NavCalendar';
 
 import changeDate from '../Utils/Functions';
 
 class CalendarHeader extends React.Component {
     constructor (props) {
         super(props);
-
+        this.state = {
+            isVisible: false,
+        }
+        this.showModal = this.showModal.bind(this);
+        this.onModalClose = this.onModalClose.bind(this);
+    }
+    onModalClose () {
+        this.setState({
+            isVisible: false,
+        })
+    }
+    showModal () {
+        this.setState({
+            isVisible: true,
+        })
     }
     render () {
         let currentDay = this.props.currentDay;
@@ -24,7 +38,9 @@ class CalendarHeader extends React.Component {
                         <span>{monthName}</span>
                         <span>{currentDay.year}</span>
                     </div>
-                    <NavCalendar />
+                    {' '}
+                    <i className='fas fa-caret-down' onClick={this.showModal}></i>
+                    {this.state.isVisible && <NavCalendar onModalClose={this.onModalClose} />}
                 </div>
             </div>
         );
