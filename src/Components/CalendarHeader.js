@@ -11,19 +11,9 @@ class CalendarHeader extends React.Component {
         this.state = {
             isVisible: false,
         }
-        this.showModal = this.showModal.bind(this);
-        this.onModalClose = this.onModalClose.bind(this);
     }
-    onModalClose () {
-        this.setState({
-            isVisible: false,
-        })
-    }
-    showModal () {
-        this.setState({
-            isVisible: true,
-        })
-    }
+    onModalClose = () => this.setState({ isVisible: false })
+    showModal = () => this.setState({ isVisible: true })
     render () {
         let currentDay = this.props.currentDay;
         let date = new Date(currentDay.year, currentDay.month, currentDay.date);
@@ -32,14 +22,14 @@ class CalendarHeader extends React.Component {
             <div className='navigation-container'>
                 <div className='navigation-options'>
                     <div className='show-today-button' onClick={this.props.changeToCurrent}>TODAY</div>
-                    <i className="fas fa-chevron-left" onClick={() => { this.props.goToPreviousMonth(changeDate(currentDay, true)) }}></i>
-                    <i className="fas fa-chevron-right" onClick={() => { this.props.goToNextMonth(changeDate(currentDay, false)) }}></i>
-                    <div className='year-month-wrapper'>
+                    <span className='chevron-left' onClick={() => { this.props.goToPreviousMonth(changeDate(currentDay, true)) }}><i className="fas fa-chevron-left"></i></span>
+                    <span className='chevron-left' onClick={() => { this.props.goToNextMonth(changeDate(currentDay, false)) }}><i className="fas fa-chevron-right"></i></span>
+                    <div className='year-month-wrapper' onClick={this.showModal}>
                         <span>{monthName}</span>
                         <span>{currentDay.year}</span>
+                        {' '}
+                        <i className='fas fa-caret-down'></i>
                     </div>
-                    {' '}
-                    <i className='fas fa-caret-down' onClick={this.showModal}></i>
                     {this.state.isVisible && <NavCalendar onModalClose={this.onModalClose} />}
                 </div>
             </div>

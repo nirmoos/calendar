@@ -3,27 +3,25 @@ import React from 'react';
 import '../Stylesheets/NavCalendarView.css';
 import TableBody from './TableBody';
 
-class CalendarNavView extends React.Component {
+class NavCalendarView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentDay: props.currentDay,
         }
-        this.onClick = this.onClick.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({
             currentDay: nextProps.currentDay,
         });
     }
-    onClick (event) {
+    onClick = ( event ) => {
         let date = this.state.currentDay;
         date.date = event.currentTarget.dataset.value;
         this.props.updateCurrentDay(date);
         this.props.onModalClose();
     }
     render() {
-        console.log(this.props.reminderList);
         return (
            <div className='nav-table-container'>
                 <table className='nav-table'>
@@ -47,4 +45,4 @@ class CalendarNavView extends React.Component {
     }
 }
 
-export default CalendarNavView;
+export default NavCalendarView;

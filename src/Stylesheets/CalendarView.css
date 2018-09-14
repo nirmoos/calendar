@@ -3,13 +3,13 @@
 }
 .table-container th {
     width: 14.2%;
-    height: 50px;
+    min-height: 3.1%;
     border-bottom: none;
     padding: 0;
 }
 .table-container td {
     width: 14.2%;
-    height: 92px;
+    height: 90px;
 }
 .table-container td:first-child.curr-month-day {
     color: red;
@@ -20,6 +20,7 @@
 }
 .table-container {
      font-size: 14px;
+     height: 93.15%;
 }
 .remainder-name {
     background-color: green;
@@ -27,8 +28,19 @@
     border-radius: 5px;
     padding: 2px 5px;
     margin-bottom: 5px;
-    text-overflow: ellipsis;
+    max-width: 150px;
+    width: 100%;
+    text-overflow: hidden;
 }
 .table-container td {
     overflow: hidden;
+}
+.remainder-name:hover {
+    cursor: pointer;
+}
+.current-day span {
+    background-color: #0066cc;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px;
 }

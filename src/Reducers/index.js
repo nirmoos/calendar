@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { currentDay, reminderList, history } from './reducers';
+import { currentDay, reminderList } from './reducers';
 
 const rootReducer = combineReducers({
     currentDay,

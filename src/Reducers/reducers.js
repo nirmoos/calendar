@@ -1,43 +1,40 @@
-export function currentDay (state=initialCurrentDayState(), action) {
-    switch (action.type) {
+export function currentDay ( state=initialCurrentDayState(), action ) {
+    switch ( action.type ) {
         case 'UPDATE_CURRENT_DAY':
-            return {
-                year: action.year,
-                month: action.month,
-                date: action.date,
-            };
+            return action.payload;
         default:
             return state;
     }
 };
 
-export function reminderList (state={}, action) {
-    switch (action.type) {
+export function reminderList ( state={}, action ) {
+    let newState;
+    switch ( action.type ) {
         case 'ADD_REMINDER':
-            let obj = { title: action.title, date: action.date, time: action.time  };
-            let year = obj.date.year; let month = obj.date.month;
-            let newState = {...state};
+            let { payload: obj } = action;
+            let { year, month } = obj.date;
 
-            newState[year] !== undefined ? (
-                newState[year][month] !== undefined ? (
-                    newState[year][month] = combineAndSort( newState[year][month], obj )
+            newState = { ...state };
+
+            newState[ year ] !== undefined ? (
+                newState[ year ][ month ] !== undefined ? (
+                    newState[ year ][ month ] = combineAndSort( newState[ year ][ month ], obj )
                 ) : (
-                    newState[year][month] = combineAndSort( [], obj )
+                    newState[ year ][ month ] = combineAndSort( [], obj )
                 )
             ) : (
-                newState[year] = { [month]: combineAndSort( [], obj ) }
+                newState[ year ] = { [ month ]: combineAndSort( [], obj ) }
             );
             return newState;
         case 'DELETE_REMINDER':
-            //logic
-            break;
+            newState = deleteReminder( action.payload.date, action.payload.title, { ...state } );
+            return newState;
         default:
             return state;
     }
 }
 
-const initialCurrentDayState = () => {
-    let date = new Date();
+const initialCurrentDayState = ( date=new Date ()) => {
     return {
         year: date.getFullYear(),
         month: date.getMonth(),
@@ -45,13 +42,24 @@ const initialCurrentDayState = () => {
     }
 }
 
-
 function combineAndSort ( obj, date ) {
-    for (let i=0; i<obj.length; i++) {
+    for ( let i=0; i<obj.length; i++ ) {
         if ( Number( obj[i].date.date ) > Number( date.date.date ) ) {
-            obj.splice(i, 0, date);
-            return [...obj];
+            obj.splice( i, 0, date );
+            return obj;
         }
     }
-    return [...obj, date];
+    return [ ...obj, date ];
+}
+
+function deleteReminder ( dateObj, title, state ) {
+    let { year, month, date } = initialCurrentDayState( dateObj );
+    let reminderArray = state[ year ][ month ];
+    for ( let i=0; i<reminderArray.length; i++ ) {
+        if ( reminderArray[ i ].date.date === date.toString() && reminderArray[ i ].title === title ) {
+            reminderArray.splice( i, 1 );
+            break;
+        }
+    }
+    return state;
 }

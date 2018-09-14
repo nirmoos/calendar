@@ -8,13 +8,12 @@ import { createStore } from 'redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-// import AddReminder from './Components/AddReminder';
-const store = createStore(rootReducer);
 
+const store = createStore( rootReducer );
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={ store }>
         <Calendar />
     </Provider>,
-    document.getElementById('root')
+    document.getElementById( 'root' )
 );

@@ -1,24 +1,27 @@
 import CalendarView from '../Components/CalendarView';
-
 import { connect } from 'react-redux';
 
-const mapStatetoProps = state => ({
+import { update_current_day } from '../Actions';
+
+const mapStatetoProps = state => ( {
     currentDay: state.currentDay,
     reminderList: getReminderList( state.currentDay, state.reminderList ),
-});
+} );
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchtoProps = dispatch => ( {
+    goToPreviousMonth: ( date ) => dispatch( update_current_day(date) ),
+    goToNextMonth: ( date ) => dispatch( update_current_day(date) ),
+} );
 
-});
 export default connect (
     mapStatetoProps,
     mapDispatchtoProps,
-)(CalendarView);
+)( CalendarView );
 
 function getReminderList ( date, reminderList ) {
-    return reminderList[date.year] !== undefined ? (
-        reminderList[date.year][date.month] !== undefined ? (
-            reminderList[date.year][date.month]
+    return reminderList[ date.year ] !== undefined ? (
+        reminderList[ date.year ][ date.month ] !== undefined ? (
+            reminderList[ date.year ][ date.month ]
         ) : []
     ) : [];
 }
