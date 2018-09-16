@@ -1,59 +1,25 @@
-
-.nav-calendar-button {
-     display: inline-block;
-}
-#remNavModal th {
-    width: 10px;
-    height: 10px;
-}
-#remNavModal td {
-    width: 10px;
-    height: 10px;
-}
-#remNavModal td.current-month-day:hover {
-     background-color: #d9d9d9;
-     border-radius: 45px;
-     cursor: pointer;
-}
 .rem-nav-modal {
-    display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    padding-top: 220px;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
 /* Modal Content */
 .rem-nav-modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
+    box-shadow: 0px 0px 30px 0.5px rgba(0,0,0,0.76);
+    position: absolute;
+    background-color: #fff;
+    left: 41%;
+    top: 35%;
     border: 1px solid #888;
-    width: 160px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetopnav;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetopnav;
-    animation-duration: 0.4s
+    width: 260px;
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetopnav {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetopnav {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
 
 /* The Close Button */
 .close {
@@ -76,20 +42,59 @@
     color: white;
 }
 
-.rem-nav-modal-body {padding: 2px 16px;}
+.rem-nav-modal-body {padding: 2px 0px 15px 9px;}
 
 .rem-nav-modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
+.month-span {
+    position: absolute;
+    right: 37px;
+    top: 6px;
+}
+.rightChevron {
+    padding: 5px 10px;
+    border-radius: 110px;
+}
+.leftChevron i, .rightChevron i {
+    padding-left: 0;
+
+}
+.leftChevron {
+    padding: 5px 10px 5px 10px;
+    border-radius: 110px;
+    margin-left: 14px;
+}
 .leftChevron:hover, .rightChevron:hover {
     background-color: #d9d9d9;
+    cursor: pointer;
 }
-.leftChevron, .rightChevron {
-    padding: 0px 5px;
-    border-radius: 10px;
+.rem-nav-modal-body > span {
+    font-size: 12px;
+    font-weight: 500;
 }
-.month-span {
-    margin-left: 13px;
+#remNavModal th {
+    padding-left: 10px;
+    width: 24px !important;
+    height: 24px !important;
+}
+#remNavModal td {
+    padding-left: 10px;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.rem-nav-table td.current-month-day:hover {
+     background-color: #d9d9d9 !important;
+     border-radius: 45px !important;
+     cursor: pointer;
+}
+.rem-nav-table {
+    font-size: 10px !important;
+    font-weight: 545px !important;
+}
+.rem-nav-modal .nav-table-container {
+    padding-left: 15px;
 }

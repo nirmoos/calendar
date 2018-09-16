@@ -27,22 +27,20 @@ class RemNavCalendar extends React.Component {
     updateMonth = ( date ) => this.setState({ currentDay: date })
     render () {
          let date = new Date(this.state.currentDay.year, this.state.currentDay.month, this.state.currentDay.date);
-         let monthName = date.toLocaleString("en-us", { month: "short" });
+         let monthName = date.toLocaleString("en-us", { month: 'long' });
          return (
              <div className='rem-nav-modal fade' id='remNavModal' tabIndex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' style={{ display: 'block', opacity: '1' }}>
              <div className='rem-nav-modal-content'>
                  <div className='rem-nav-modal-body'>
-                     <span className='leftChevron'>
-                         <i className='fas fa-chevron-left' onClick={ () => { this.updateMonth(changeDate(this.state.currentDay, true)) } }></i>
+                     <span className='leftChevron' onClick={ () => { this.updateMonth(changeDate(this.state.currentDay, true)) } }>
+                         <i className='fas fa-chevron-left'></i>
                      </span>
                      {' '}
-                     <span className='rightChevron'>
-                         <i className='fas fa-chevron-right' onClick={ () => { this.updateMonth(changeDate(this.state.currentDay, false)) } }></i>
+                     <span className='rightChevron' onClick={ () => { this.updateMonth(changeDate(this.state.currentDay, false)) } }>
+                         <i className='fas fa-chevron-right'></i>
                      </span>
                      {' '}
-                     <span className='month-span'>{ monthName }</span>
-                     {' '}
-                     <span>{ this.state.currentDay.year }</span>
+                     <span className='month-span'>{ monthName }{' '}{ this.state.currentDay.year }</span>
                      <NavCalendarView
                          currentDay={ this.state.currentDay }
                          updateCurrentDay={ this.props.updateCurrentDay }

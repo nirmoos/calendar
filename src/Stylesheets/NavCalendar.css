@@ -7,19 +7,18 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
 /* Modal Content */
 .nav-modal-content {
+    box-shadow: 0px 0px 30px 0.5px rgba(0,0,0,0.76);
     position: relative;
-    background-color: #fefefe;
+    background-color: #fff;
     margin: auto;
     padding: 0;
     border: 1px solid #888;
     width: 260px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetopnav;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetopnav;
@@ -58,7 +57,7 @@
     color: white;
 }
 
-.nav-modal-body {padding: 2px 16px;}
+.nav-modal-body {padding: 2px 0px 15px 14px;}
 
 .nav-modal-footer {
     padding: 2px 16px;
@@ -66,7 +65,10 @@
     color: white;
 }
 .month-span-main {
-    margin-left: 33px;
+    margin-left: 20px;
+    position: absolute;
+    right: 36px;
+    top: 6px;
 }
 .right-chevron {
     padding: 5px 10px;
@@ -79,9 +81,13 @@
 .left-chevron {
     padding: 5px 10px 5px 0;
     border-radius: 110px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 .left-chevron:hover, .right-chevron:hover {
     background-color: #d9d9d9;
     cursor: pointer;
+}
+.nav-modal-body > span {
+    font-size: 12px;
+    font-weight: 500;
 }

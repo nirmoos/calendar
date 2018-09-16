@@ -11,6 +11,7 @@ export function save_reminder ( title, date, time ) {
               title: title,
               date: date,
               time: time,
+              isCompleted: false,
           }
      }
 }
@@ -22,4 +23,14 @@ export function delete_remider ( date, title ) {
               title: title,
           }
      }
+}
+
+export function toggle_the_reminder_flag ( date, title ) {
+    return {
+        type: 'TOGGLE_THE_REMINDER_FLAG',
+        payload: {
+            date: date,
+            title: title,
+        }
+    }
 }

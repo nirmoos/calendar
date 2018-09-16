@@ -21,9 +21,9 @@ class CalendarHeader extends React.Component {
         return (
             <div className='navigation-container'>
                 <div className='navigation-options'>
-                    <div className='show-today-button' onClick={this.props.changeToCurrent}>TODAY</div>
-                    <span className='chevron-left' onClick={() => { this.props.goToPreviousMonth(changeDate(currentDay, true)) }}><i className="fas fa-chevron-left"></i></span>
-                    <span className='chevron-left' onClick={() => { this.props.goToNextMonth(changeDate(currentDay, false)) }}><i className="fas fa-chevron-right"></i></span>
+                    <div data-toggle='tooltip' data-placement='bottom' title='Show today' className='show-today-button' onClick={this.props.changeToCurrent}>TODAY</div>
+                    <span data-toggle='tooltip' data-placement='bottom' title='Move to previous month' className='chevron-left' onClick={() => { this.props.goToPreviousMonth(changeDate(currentDay, true)) }}><i className="fas fa-chevron-left"></i></span>
+                    <span data-toggle='tooltip' data-placement='bottom' title='Move to next month' className='chevron-left' onClick={() => { this.props.goToNextMonth(changeDate(currentDay, false)) }}><i className="fas fa-chevron-right"></i></span>
                     <div className='year-month-wrapper' onClick={this.showModal}>
                         <span>{monthName}</span>
                         <span>{currentDay.year}</span>

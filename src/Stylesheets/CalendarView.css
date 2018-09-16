@@ -1,5 +1,6 @@
 .prev-month-day, .next-month-day {
     color: #adad85;
+    padding: 5px 5px !important;
 }
 .table-container th {
     width: 14.2%;
@@ -25,10 +26,10 @@
 .remainder-name {
     background-color: green;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 3px;
     padding: 2px 5px;
     margin-bottom: 5px;
-    max-width: 150px;
+    max-width: 100%;
     width: 100%;
     text-overflow: hidden;
 }
@@ -42,5 +43,28 @@
     background-color: #0066cc;
     color: #fff;
     border-radius: 15px;
+    margin-bottom: 5px !important;
     padding: 5px;
+}
+td.curr-month-day {
+    padding: 5px 0px 0px !important;
+}
+td.curr-month-day span {
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+.total-reminders {
+    text-align: right;
+}
+.total-reminders > span {
+    background-color: #b35900;
+    border-radius: 16px;
+    color: #fff;
+    padding: 5px 10px !important;
+    margin-right: 10px;
+    font-weight: 540;
+    margin-top: 5px;
+    display: inline-block;
+    width: 30px;
+    cursor: pointer;
 }

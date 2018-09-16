@@ -1,7 +1,5 @@
 import React from 'react';
 
-let rLIndex = 0;
-
 const MainTableBody = ({ year, month, onClick, ...props }) => {
 
     let currMonthPos = 1;
@@ -39,13 +37,16 @@ const MainTableBody = ({ year, month, onClick, ...props }) => {
             if ( currMonthPos <= currMonthLastDay ) {
                 tds.push(
                     <td
+                        data-toggle='tooltip'
+                        data-placement='bottom'
+                        title='Click to add reminders'
                         key={ keyIndex++ }
                         data-value={ currMonthPos }
-                        className={getClassname( year, month, currMonthPos )}
+                        className={ getClassname ( year, month, currMonthPos ) }
                         onClick={ onClick } >
                         <span>{ currMonthPos++ }</span>
                         <ShowReminders
-                            onClick={ obj => props.onEditEnable( obj )}
+                            onClick={ props.onEditEnable }
                             reminderList={ reminderList }
                             position={ currMonthPos-1 }
                         />
@@ -57,7 +58,6 @@ const MainTableBody = ({ year, month, onClick, ...props }) => {
         }
         tbody.push(<tr key={ i }>{ tds }</tr>);
     }
-    rLIndex = 0;
     return tbody;
 }
 
@@ -66,28 +66,39 @@ export default MainTableBody;
 const ShowReminders = ( props ) => {
     let reminderList = props.reminderList;
     let position = props.position;
-    let myArray = [];
-    let i = 0;
-    if ( reminderList[ rLIndex ] !== undefined ) {
-        if ( Number( reminderList[ rLIndex ].date.date ) === position ) {
-            do {
-                myArray.push(
-                    <div
-                        key={ i++ }
-                        onClick={
-                            ( i => e => {
-                                e.stopPropagation();
-                                props.onClick( reminderList[ i ] );
-                            } )( rLIndex )
-                        }
-                        className='remainder-name'
-                        >
-                        { reminderList[ rLIndex++ ].title }
-                    </div>);
-            } while ( reminderList[ rLIndex ] !== undefined && Number( reminderList[ rLIndex ].date.date ) === position );
+    let i = 0; let len = 0;
+    for ( let obj of reminderList ) {
+        let day = Number ( obj.date.date );
+        if ( day === position ) {
+            for ( ; reminderList[ i ] !== undefined && Number ( reminderList[ i ].date.date ) === position; i++ ) {
+                len ++;
+            }
+            const span = <div
+                key={0}
+                data-toggle='tooltip'
+                data-placement='bottom'
+                title='Click to see all reminders'
+                data-day={ position }
+                onClick={ props.onClick }
+                className='remainder-name'
+                >
+                    { reminderList[ i-1 ].title}
+            </div>;
+            const div = <div key={1} className='total-reminders'><span
+                data-toggle='tooltip'
+                data-placement='bottom'
+                title='Click to see all reminders'
+                data-day={ position }
+                onClick={ props.onClick }
+                >
+                    {len}
+                </span>
+            </div>;
+            return [ span, div ];
         }
+        i ++;
     }
-    return myArray;
+    return null;
 }
 
 function getClassname ( year, month, day ) {

@@ -26,6 +26,7 @@ class CalendarView extends React.Component {
             this.props.goToNextMonth( changeDate( this.state.currentDay, false ) );
     }
     onClick = ( event ) => {
+        event.stopPropagation();
         this.clickedDate = event.currentTarget.dataset.value;
         this.setState({
             isVisible: true,
@@ -33,18 +34,25 @@ class CalendarView extends React.Component {
     }
     onModalClose = () => {
         this.setState({ isVisible: false });
+        if ( this.cemValue !== undefined && this.cemValue !== '' )
+            this.setState({ isShowEdit: true });
         this.cemValue = '';
     }
-    onEditEnable = ( obj ) => {
-        this.setState({
+    onEditEnable = event => {
+        event.stopPropagation();
+        this.setState( {
+            currentDay: {
+                year: this.state.currentDay.year,
+                month: this.state.currentDay.month,
+                date: event.currentTarget.dataset.day,
+            },
             isShowEdit: true,
-        });
-        this.taskDetails = obj;
+        } );
     }
     changeToEditMode = ( date, title ) => {
-        this.setState({ isShowEdit: false, isVisible: true });
         this.clickedDate = date.getDate();
         this.cemValue = { date: date, title: title };
+        this.setState({ isVisible: true });
     }
     onEditDisable = () => this.setState({ isShowEdit: false })
     render() {
@@ -81,7 +89,7 @@ class CalendarView extends React.Component {
                 { this.state.isShowEdit && <EditReminder
                     onEditDisable={ this.onEditDisable }
                     changeToEditMode={ this.changeToEditMode }
-                    taskDetails={ this.taskDetails }
+                    currentDay={ this.state.currentDay }
                  /> }
             </div>
         );
