@@ -33,7 +33,7 @@ class EditReminder extends React.Component {
             currentHoverKey: event.currentTarget.dataset.id.toString(),
         })
     }
-    onMouseOut = () => {
+    onMouseLeave = () => {
         this.setState({
             isVisible: false,
             currentHoverKey: '',
@@ -77,7 +77,7 @@ class EditReminder extends React.Component {
                     <ul className='reminder-list'>
                     <li key={0}><i className='far fa-clock'></i><span>{day}{', '}{date}{' '}{monthName}</span></li>
                     {reminderList.map( ( arObj, index ) =>
-                            <li key={ index+1 } data-id={ index+1 }  onMouseOver={ this.onMouseOver } onMouseOut={ this.onMouseOut } className='sigle-list-item'>
+                            <li key={ index+1 } data-id={ index+1 }  onMouseOver={ this.onMouseOver } onMouseLeave={ this.onMouseLeave } className='sigle-list-item'>
                                 <i className='fas fa-bell'></i>
                                 <span data-toggle='tooltip' data-placement='bottom' title={arObj.time} className={arObj.isCompleted ? 'strike-me-through' : ''}>
                                     { arObj.title }
