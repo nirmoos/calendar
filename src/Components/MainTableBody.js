@@ -77,12 +77,12 @@ const ShowReminders = ( props ) => {
                 key={0}
                 data-toggle='tooltip'
                 data-placement='bottom'
-                title='Click to see all reminders'
+                title={reminderList[ i-1 ].title}
                 data-day={ position }
                 onClick={ props.onClick }
-                className='remainder-name'
+                className={'remainder-name '+ (reminderList[ i-1 ].isCompleted ? 'strike-me-through' : '')}
                 >
-                    { reminderList[ i-1 ].title}
+                    { reminderList[ i-1 ].title }
             </div>;
             const div = <div key={1} className='total-reminders'><span
                 data-toggle='tooltip'
