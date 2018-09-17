@@ -8,17 +8,26 @@ class AddReminder extends React.Component {
      constructor( props ) {
           super( props );
           this.state = {
-               taskName: this.props.cemValue === undefined ? '' : (
-                   this.props.cemValue.title === undefined ? '' : this.props.cemValue.title
-               ),
-               currentDay: {
-                   year: this.props.currentDay.year,
-                   month: this.props.currentDay.month,
-                   date: this.props.clickedDate,
-               },
+               taskName: '',
+               currentDay: '',
                time: '12:00',
                isVisible: false,
           }
+     }
+     componentWillMount = () => {
+         this.setState({
+             taskName: this.props.cemValue === undefined ? '' : (
+                 this.props.cemValue.title === undefined ? '' : this.props.cemValue.title
+             ),
+             time: this.props.cemValue === undefined ? '12:00' : (
+                 this.props.cemValue.time === undefined ? '12:00' : this.props.cemValue.time
+             ),
+             currentDay: {
+                 year: this.props.currentDay.year,
+                 month: this.props.currentDay.month,
+                 date: this.props.clickedDate,
+             },
+         })
      }
      componentDidMount (event) {
          let modal = document.getElementById('addTaskModal');

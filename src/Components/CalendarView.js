@@ -10,10 +10,15 @@ class CalendarView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentDay: this.props.currentDay,
+            currentDay: '',
             isVisible: false,
             isShowEdit: false,
         }
+    }
+    componentWillMount = () => {
+        this.setState({
+            currentDay: this.props.currentDay,
+        });
     }
     componentWillReceiveProps = ( nextProps ) => this.setState({ currentDay: nextProps.currentDay })
     componentDidMount = () => {
@@ -33,9 +38,10 @@ class CalendarView extends React.Component {
         })
     }
     onModalClose = () => {
-        this.setState({ isVisible: false });
         if ( this.cemValue !== undefined && this.cemValue !== '' )
-            this.setState({ isShowEdit: true });
+            this.setState({ isVisible: false, isShowEdit: true });
+        else
+            this.setState({ isVisible: false });
         this.cemValue = '';
     }
     onEditEnable = event => {
@@ -49,10 +55,10 @@ class CalendarView extends React.Component {
             isShowEdit: true,
         } );
     }
-    changeToEditMode = ( date, title ) => {
+    changeToEditMode = ( date, title, time ) => {
         this.clickedDate = date.getDate();
-        this.cemValue = { date: date, title: title };
-        this.setState({ isVisible: true });
+        this.cemValue = { date: date, title: title, time: time };
+        this.setState({ isShowEdit: false, isVisible: true });
     }
     onEditDisable = () => this.setState({ isShowEdit: false })
     render() {

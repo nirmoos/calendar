@@ -12,7 +12,7 @@ class EditReminder extends React.Component {
         };
     }
     onDeleteButtonClick = event => {
-        event.stopPropagation();
+        // event.stopPropagation();
         let index = Number ( event.currentTarget.dataset.id );
         let title = this.props.reminderList[index].title;
         let { year, month, date } = this.props.currentDate;
@@ -40,7 +40,7 @@ class EditReminder extends React.Component {
         })
     }
     toggleTheReminderFlag = event => {
-        event.stopPropagation();
+        // event.stopPropagation();
         let index = Number ( event.currentTarget.dataset.id );
         let title = this.props.reminderList[index].title;
         let { year, month, date } = this.props.currentDate;
@@ -48,13 +48,17 @@ class EditReminder extends React.Component {
         this.props.toggleTheReminderFlag( newDate, title );
     }
     onChangeToEdit = event => {
-        event.stopPropagation();
-        this.props.onEditDisable();
+        // event.stopPropagation();
         let index = Number ( event.currentTarget.dataset.id );
         let title = this.props.reminderList[index].title;
+        let time = this.props.reminderList[index].time;
         let { year, month, date } = this.props.currentDate;
         let newDate = new Date( year, month, date );
-        this.props.changeToEditMode( newDate, title );
+        this.props.changeToEditMode( newDate, title, time );
+    }
+    componentDidUpdate = () => {
+        if ( this.props.reminderList === undefined )
+            this.props.onEditDisable();
     }
     render () {
         let days = [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
@@ -87,7 +91,7 @@ class EditReminder extends React.Component {
                                         <span data-toggle='tooltip' data-placement='bottom' title='Edit this reminder' data-id={ index } className='list-buttons' onClick={ this.onChangeToEdit }><i className='fas fa-pen'></i></span>
                                         <span data-toggle='tooltip' data-placement='bottom' title='Delete this reminder' data-id={ index } onClick={ this.onDeleteButtonClick } className='list-buttons'><i className='fas fa-trash'></i></span>
                                         <span data-toggle='tooltip' data-placement='bottom' title='Mark as read' data-id={ index } onClick={ this.toggleTheReminderFlag } className='list-buttons'>
-                                            { arObj.isCompleted ? <i class='fas fa-undo'></i> : <i className='fas fa-check'></i> }
+                                            { arObj.isCompleted ? <i className='fas fa-undo'></i> : <i className='fas fa-check'></i> }
                                         </span>
                                     </div>
                                 )}
@@ -100,7 +104,6 @@ class EditReminder extends React.Component {
             </div>
         );
         else {
-            this.props.onEditDisable();
             return null;
         }
     }
