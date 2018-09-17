@@ -10,7 +10,7 @@
 }
 .table-container td {
     width: 14.2%;
-    height: 103px;
+    height: 94px;
 }
 .table-container td:first-child.curr-month-day {
     color: red;
@@ -63,7 +63,7 @@ td.curr-month-day span {
     padding: 5px 10px !important;
     margin-right: 10px;
     font-weight: 540;
-    margin-top: 5px;
+    margin: 0px 0px 5px !important;
     display: inline-block;
     width: 30px;
     cursor: pointer;
